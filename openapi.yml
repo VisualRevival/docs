@@ -1,0 +1,309 @@
+openapi: 3.0.0
+info:
+  title: Visual Revival API
+  description: Visual Revival API Documention for AWS and Wordpress
+  version: 1.0.0
+  contact:
+    email: austin@blythe.io
+tags:
+  - name: Wordpress
+    description: Wordpress Endpoints
+  - name: AWS
+    description: AWS Endpoints
+paths:
+  /bundle:
+    put:
+      tags:
+        - Wordpress
+      summary: Update bundle
+      description: Update an existing bundle
+      operationId: updateBundle
+      requestBody:
+        $ref: "#/components/requestBodies/Bundle"
+      responses:
+        "204":
+          description: Product updated
+        "400":
+          description: Invalid request
+        "404":
+          description: Product not found
+  /product:
+    post:
+      tags:
+        - Wordpress
+      summary: Create product
+      description: Create a new product
+      operationId: createProduct
+      requestBody:
+        $ref: "#/components/requestBodies/Product"
+      responses:
+        "201":
+          description: Product created
+        "400":
+          description: Invalid request
+    put:
+      tags:
+        - Wordpress
+      summary: Update product
+      description: Update an existing product
+      operationId: updateProduct
+      requestBody:
+        $ref: "#/components/requestBodies/Product"
+      responses:
+        "204":
+          description: Product updated
+        "400":
+          description: Invalid request
+        "404":
+          description: Product not found
+  /product/{productId}/downloads:
+    get:
+      tags:
+        - AWS
+      summary: Get downloads by product ID
+      description: Gets the downloads for a product or bundle
+      operationId: getDownloadsByProductId
+      parameters:
+        - name: productId
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DownloadResponse"
+        "400":
+          description: Invalid request
+        "404":
+          description: Product not found
+  /download/{downloadId}:
+    get:
+      tags:
+        - AWS
+      summary: Get download by ID
+      description: Gets a single download by ID
+      operationId: getDownloadById
+      parameters:
+        - name: downloadId
+          in: path
+          description: The ID of the download
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: filename
+          in: query
+          description: The filename the browser should use when saving the file to the user's filesystem. If not provided, the last saved filename from AWS will be used.
+          required: false
+          schema:
+            type: string
+            example: Filename123.mp4
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DownloadResponse"
+        "400":
+          description: Invalid request
+        "404":
+          description: Download not found
+servers:
+  - url: https://visualrevival.wordpress.com/api/v1
+components:
+  requestBodies:
+    Bundle:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Bundle"
+      description: Bundle object to be updated
+      required: true
+    Product:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Product"
+      description: Product object to be created or updated
+      required: true
+  schemas:
+    DownloadResponse:
+      type: object
+      required:
+        - id
+        - url
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique download ID generated in AWS
+        url:
+          type: string
+          example: https://cloudfront.net/productid/downloadid.mp4?Expires=1234&Signature=ABCD
+          description: Full download URL with CloudFront signing parameters
+    Download:
+      type: object
+      required:
+        - name
+        - product_id
+        - format
+        - url
+        - size
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique download ID generated in AWS
+        name:
+          type: string
+          example: Filename.mp4
+          description: Friendly name of file including extension
+        product_id:
+          type: string
+          format: uuid
+          description: ID of parent bundle or product
+        format:
+          type: string
+          description: File format
+          enum:
+            - MP4
+            - ZIP
+            - JPEG
+            - PRORES
+            - PNG
+        resolution:
+          type: string
+          description: Friendly name for resolution
+          enum:
+            - 6K Pro
+            - 4K Pro
+            - 1080p Pro
+            - 4K
+            - 1080p
+            - 720p
+            - DW Pro
+            - TW Pro
+        url:
+          type: string
+          example: https://cloudfront.net/productid/downloadid.mp4
+          description: Base URL for download without signing parameters
+        size:
+          type: integer
+          format: int64
+          description: File size in bytes
+          example: 24523
+    Bundle:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - thumbnail
+        - preview_hover
+        - preview_video
+        - downloads
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique ID of bundle generated by Wordpress
+        name:
+          type: string
+          example: Prism Glow
+          description: Name of bundle
+        description:
+          type: string
+          example: Colorful bokeh drifting and evolve across the screen creating beautiful lens effects.
+          description: Description of bundle
+        thumbnail:
+          type: string
+          description: Static image used in content lists on the website
+          example: https://cloudfront.net/bundleId/thumbnail.jpg
+        preview_hover:
+          type: string
+          description: Played when user hovers over thumbnail
+          example: https://cloudfront.net/bundleId/preview_hover.mp4
+        preview_video:
+          type: string
+          description: Featured preview on bundle product page
+          example: https://cloudfront.net/bundleId/preview_video.mp4
+        downloads:
+          description: List of bundle downloads
+          type: array
+          items:
+            $ref: "#/components/schemas/Download"
+    Product:
+      type: object
+      required:
+        - bundle_id
+        - name
+        - type
+        - description
+        - thumbnail
+        - preview_hover
+        - preview_video_full
+        - downloads
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique ID of product generated by Wordpress
+        bundle_id:
+          type: string
+          format: uuid
+          description: Parent bundle ID for product
+        name:
+          type: string
+          example: Prism Glow 01
+          description: Name of product
+        type:
+          type: string
+          description: Content type
+          enum:
+            - Motion Background
+            - Still
+            - Countdown
+            - Motion Title
+            - Title Slides
+            - Title Overlays
+            - ProPresenter 7
+        description:
+          type: string
+          example: Colorful bokeh drifting and evolve across the screen creating beautiful lens effects.
+          description: Description of product
+        price:
+          type: string
+          format: currency
+          example: "10.00"
+          description: Price of product
+        duration:
+          type: integer
+          format: int64
+          description: Duration in seconds if the product is a video
+          example: 125
+        thumbnail:
+          type: string
+          description: Static image used in content lists on the website
+          example: https://cloudfront.net/bundleId/thumbnail.jpg
+        preview_hover:
+          type: string
+          description: Played when user hovers over thumbnail
+          example: https://cloudfront.net/bundleId/preview_hover.mp4
+        preview_video_full:
+          type: string
+          description: Full streaming video preview when a specific video is clicked on a product page
+          example: https://vimeo.com/someVimeoId
+        downloads:
+          description: List of downloads for the product
+          type: array
+          items:
+            $ref: "#/components/schemas/Download"
