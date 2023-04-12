@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "redocly build-docs --output docs/index.html docs/openapi.yml"
+    "build": "redocly build-docs --output docs/index.html docs/openapi.yml",
+    "preview": "redocly preview-docs docs/openapi.yml"
   },
   "devDependencies": {
     "@redocly/cli": "^1.0.0-beta.125"
