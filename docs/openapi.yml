@@ -337,11 +337,6 @@ components:
           type: string
           example: Colorful bokeh drifting and evolve across the screen creating beautiful lens effects.
           description: Description of product
-        price:
-          type: string
-          format: currency
-          example: "10.00"
-          description: Price of product
         duration:
           type: integer
           format: int64
