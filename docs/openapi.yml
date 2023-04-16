@@ -149,15 +149,27 @@ components:
     NewDownload:
       type: object
       required:
-        - name
+        - filename
+        - type
         - format
         - url
         - size
       properties:
-        name:
+        filename:
           type: string
           example: Filename.mp4
           description: Friendly name of file including extension
+        type:
+          type: string
+          description: Content type
+          enum:
+            - motion-background
+            - still
+            - countdown
+            - motion-title
+            - title-slide
+            - title-overlay
+            - propresenter-7
         format:
           type: string
           description: File format
@@ -191,7 +203,8 @@ components:
     Download:
       type: object
       required:
-        - name
+        - filename
+        - type
         - format
         - url
         - size
@@ -200,10 +213,21 @@ components:
           type: string
           format: uuid
           description: Unique download ID generated in AWS
-        name:
+        filename:
           type: string
           example: Filename.mp4
           description: Friendly name of file including extension
+        type:
+          type: string
+          description: Content type
+          enum:
+            - motion-background
+            - still
+            - countdown
+            - motion-title
+            - title-slide
+            - title-overlay
+            - propresenter-7
         format:
           type: string
           description: File format
