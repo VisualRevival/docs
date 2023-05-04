@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: Visual Revival API
   description: Visual Revival API Documention for AWS and Wordpress
@@ -10,6 +10,10 @@ tags:
     description: Wordpress Endpoints
   - name: AWS
     description: AWS Endpoints
+  - name: Pack Processor Output
+    description: |
+      Schema for JSON file sent from Pack Processor to AWS
+      <SchemaDefinition schemaRef="#/components/schemas/PackProcessorOutput" />
 paths:
   /bundle:
     put:
@@ -383,3 +387,198 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/NewDownload"
+    PackProcessorOutput:
+      type: object
+      required:
+        - id
+        - downloads
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Bundle ID from Wordpress. This should always be present.
+          example: 123
+        thumbnail:
+          type: string
+          description: S3 Key of the uploaded thumbnail image for the bundle. Only required when creating a bundle.
+          example: 123/public/thumbnail.jpg
+        previewHover:
+          type: string
+          description: S3 Key of the uploaded hover preview image for the bundle. This is used in thumbnail listings. Only required when creating a bundle.
+          example: 123/public/preview_hover.jpg
+        previewVideo:
+          type: string
+          description: S3 Key of the uploaded HQ video preview for the bundle. This is the featured looping video on the bundle page. Only required when creating a bundle.
+          example: 123/public/preview_video.mp4
+        downloads:
+          type: array
+          description: List of downloads for the bundle
+          items:
+            $ref: "#/components/schemas/PackProcessorBundleDownload"
+        products:
+          type: array
+          description: List of products for the bundle
+          items:
+            $ref: "#/components/schemas/PackProcessorProduct"
+    PackProcessorProduct:
+      type: object
+      required:
+        - downloads
+      properties:
+        name:
+          type: string
+          description: Product name. Only required when creating a product.
+          example: Prism Glow Motion Background 01
+        description:
+          type: string
+          description: Product description. Only required when creating a product.
+          example: Product specific description
+        id:
+          type: integer
+          format: int64
+          description: Product ID from Wordpress. Only required when updating an existing product
+          example: 456
+        type:
+          type: string
+          description: Media type
+          enum:
+            - motion-background
+            - still
+            - countdown
+            - motion-title
+            - title-slide
+            - title-overlay
+            - propresenter-7
+        duration:
+          type: int
+          format: int64
+          description: Duration in seconds if the product is a video
+          example: 30000
+        thumbnail:
+          type: string
+          description: S3 Key of the uploaded thumbnail image for the product. Only required when creating a product.
+          example: 123/motion-background/public/01_thumbnail.jpg
+        previewHover:
+          type: string
+          description: S3 Key of the uploaded hover preview image for the product. This is used in thumbnail listings. Only required when creating a product.
+          example: 123/motion-background/public/01_preview_hover.jpg
+        previewVideoFull:
+          type: string
+          description: Vimeo URL for the full streaming video preview. Only required when creating a product.
+          example: https://vimeo.com/456
+        downloads:
+          type: array
+          description: List of downloads for the product
+          items:
+            $ref: "#/components/schemas/PackProcessorProductDownload"
+    PackProcessorBundleDownload:
+      type: object
+      required:
+        - filename
+        - type
+        - format
+        - key
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique download ID generated in AWS. This indicates an update/edit when provided.
+        filename:
+          type: string
+          example: BundleDownloadFilename.mp4
+          description: Friendly name of file including extension
+        type:
+          type: string
+          description: Media type
+          enum:
+            - motion-background
+            - still
+            - countdown
+            - motion-title
+            - title-slide
+            - title-overlay
+            - propresenter-7
+        format:
+          type: string
+          description: File format
+          enum:
+            - mp4
+            - zip
+            - jpeg
+            - prores
+            - png
+        resolution:
+          type: string
+          description: Friendly name for resolution
+          enum:
+            - 6k-pro
+            - 4K-pro
+            - 1080p-pro
+            - 4K
+            - 1080p
+            - 720p
+            - dw-pro
+            - tw-pro
+        key:
+          type: string
+          example: 123/motion-background/private/6k-pro/
+          description: S3 Key of the uploaded download file. For bundle downloads, this should be a path ending in /. For products, it should be the full object key.
+    PackProcessorProductDownload:
+      type: object
+      required:
+        - filename
+        - type
+        - format
+        - key
+        - size
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique download ID generated in AWS. This indicates an update/edit when provided.
+          example: db3e63a3-3fdc-4a21-9375-089b6e31081e
+        filename:
+          type: string
+          example: ProductDownloadFilename.mp4
+          description: Friendly name of file including extension
+        type:
+          type: string
+          description: Media type
+          enum:
+            - motion-background
+            - still
+            - countdown
+            - motion-title
+            - title-slide
+            - title-overlay
+            - propresenter-7
+        format:
+          type: string
+          description: File format
+          enum:
+            - mp4
+            - zip
+            - jpeg
+            - prores
+            - png
+        resolution:
+          type: string
+          description: Friendly name for resolution
+          enum:
+            - 6k-pro
+            - 4K-pro
+            - 1080p-pro
+            - 4K
+            - 1080p
+            - 720p
+            - dw-pro
+            - tw-pro
+        key:
+          type: string
+          example: 123/motion-background/private/6k-pro/01.mp4
+          description: S3 Key of the uploaded download file. For bundle downloads, this should be a path ending in /. For products, it should be the full object key.
+        size:
+          type: integer
+          format: int64
+          description: File size in bytes
+          example: 24523
