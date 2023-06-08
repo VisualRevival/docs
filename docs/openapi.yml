@@ -299,7 +299,6 @@ components:
         - id
         - thumbnail
         - preview_hover
-        - preview_video_full
         - downloads
       properties:
         id:
@@ -324,6 +323,10 @@ components:
           type: string
           description: Full streaming video preview when a specific video is clicked on a product page
           example: https://vimeo.com/someVimeoId
+        preview_image_full:
+          type: string
+          description: Full quality image preview
+          example: https://cloudfront.net/bundleId/preview_image_full.jpg
         downloads:
           description: List of downloads for the product
           type: array
@@ -338,7 +341,6 @@ components:
         - description
         - thumbnail
         - preview_hover
-        - preview_video_full
         - downloads
       properties:
         bundle_id:
@@ -382,6 +384,10 @@ components:
           type: string
           description: Full streaming video preview when a specific video is clicked on a product page
           example: https://vimeo.com/someVimeoId
+        preview_image_full:
+          type: string
+          description: Full quality image preview
+          example: https://cloudfront.net/bundleId/preview_image_full.jpg
         downloads:
           description: List of downloads for the product
           type: array
