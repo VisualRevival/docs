@@ -326,7 +326,7 @@ components:
         preview_video_full:
           type: string
           description: Full streaming video preview when a specific video is clicked on a product page
-          example: https://vimeo.com/someVimeoId
+          example: https://cloudfront.net/bundleId/preview_video.mp4
         preview_image_full:
           type: string
           description: Full quality image preview
@@ -387,7 +387,7 @@ components:
         preview_video_full:
           type: string
           description: Full streaming video preview when a specific video is clicked on a product page
-          example: https://vimeo.com/someVimeoId
+          example: https://cloudfront.net/bundleId/preview_video.mp4
         preview_image_full:
           type: string
           description: Full quality image preview
@@ -481,8 +481,8 @@ components:
           example: 123/motion-background/public/01_preview_hover.jpg
         previewVideoFull:
           type: string
-          description: Vimeo URL for the full streaming video preview. Only required when creating a product.
-          example: https://vimeo.com/456
+          description: S3 Key for full quality preview video
+          example: 123/motion-background/public/01_preview_video_full.mp4
         previewImageFull:
           type: string
           description: S3 Key of full quality image for media types that are not video
