@@ -10,10 +10,14 @@ tags:
     description: Wordpress Endpoints
   - name: AWS
     description: AWS Endpoints
-  - name: Pack Processor Output
+  - name: Pack Processor Bundle
     description: |
-      Schema for JSON file sent from Pack Processor to AWS
-      <SchemaDefinition schemaRef="#/components/schemas/PackProcessorOutput" />
+      Schema for JSON file sent from Pack Processor to AWS for full bundle
+      <SchemaDefinition schemaRef="#/components/schemas/PackProcessorBundle" />
+  - name: Pack Processor Standalone Product
+    description: |
+      Schema for JSON file sent from Pack Processor to AWS for standalone product
+      <SchemaDefinition schemaRef="#/components/schemas/PackProcessorProduct" />
 paths:
   /bundle:
     put:
@@ -393,10 +397,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/NewDownload"
-    PackProcessorOutput:
+    PackProcessorBundle:
       type: object
       required:
         - id
+        - type
         - downloads
       properties:
         id:
@@ -404,6 +409,11 @@ components:
           format: int64
           description: Bundle ID from Wordpress. This should always be present.
           example: 123
+        type:
+          type: string
+          description: Should always be "bundle" for processing bundles
+          enum:
+            - bundle
         thumbnail:
           type: string
           description: S3 Key of the uploaded thumbnail image for the bundle. Only required when creating a bundle.
@@ -429,6 +439,7 @@ components:
     PackProcessorProduct:
       type: object
       required:
+        - type
         - downloads
       properties:
         name:
