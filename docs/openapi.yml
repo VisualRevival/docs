@@ -472,6 +472,10 @@ components:
           type: string
           description: Vimeo URL for the full streaming video preview. Only required when creating a product.
           example: https://vimeo.com/456
+        previewImageFull:
+          type: string
+          description: S3 Key of full quality image for media types that are not video
+          example: 123/still/public/01_preview_image_full.jpg
         downloads:
           type: array
           description: List of downloads for the product
