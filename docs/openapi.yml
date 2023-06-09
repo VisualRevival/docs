@@ -192,9 +192,9 @@ components:
           description: Friendly name for resolution
           enum:
             - 6k-pro
-            - 4K-pro
+            - 4k-pro
             - 1080p-pro
-            - 4K
+            - 4k
             - 1080p
             - 720p
             - dw-pro
@@ -250,9 +250,9 @@ components:
           description: Friendly name for resolution
           enum:
             - 6k-pro
-            - 4K-pro
+            - 4k-pro
             - 1080p-pro
-            - 4K
+            - 4k
             - 1080p
             - 720p
             - dw-pro
@@ -533,9 +533,9 @@ components:
           description: Friendly name for resolution
           enum:
             - 6k-pro
-            - 4K-pro
+            - 4k-pro
             - 1080p-pro
-            - 4K
+            - 4k
             - 1080p
             - 720p
             - dw-pro
@@ -587,9 +587,9 @@ components:
           description: Friendly name for resolution
           enum:
             - 6k-pro
-            - 4K-pro
+            - 4k-pro
             - 1080p-pro
-            - 4K
+            - 4k
             - 1080p
             - 720p
             - dw-pro
