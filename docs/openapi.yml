@@ -241,7 +241,6 @@ components:
       required:
         - id
         - thumbnail
-        - preview_hover
         - downloads
       properties:
         id:
@@ -309,7 +308,6 @@ components:
       required:
         - id
         - thumbnail
-        - preview_hover
         - downloads
       properties:
         id:
@@ -376,9 +374,7 @@ components:
         - name
         - product_category
         - product_type
-        - description
         - thumbnail
-        - preview_hover
         - downloads
         - product_media
       properties:
