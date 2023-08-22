@@ -159,7 +159,6 @@ components:
       required:
         - filename
         - product_type
-        - file_format
         - download_format
         - url
         - size
@@ -172,18 +171,10 @@ components:
           type: string
           description: Product type
           example: motion-background
-        file_format:
-          type: string
-          description: Physical format / extension of file
-          example: mp4
         download_format:
           type: string
           description: Friendly format representing quality, file type, or both
           example: photoshop-hd
-        resolution:
-          type: string
-          description: Friendly name for resolution
-          example: 4K-pro
         url:
           type: string
           example: https://cloudfront.net/productid/downloadid.mp4
@@ -198,7 +189,6 @@ components:
       required:
         - filename
         - product_type
-        - file_format
         - download_format
         - url
         - size
@@ -215,18 +205,10 @@ components:
           type: string
           description: Product type
           example: motion-title
-        file_format:
-          type: string
-          description: Physical format / extension of file
-          example: jpeg
         download_format:
           type: string
           description: Friendly format representing quality, file type, or both
           example: photoshop-hd
-        resolution:
-          type: string
-          description: Friendly name for resolution
-          example: dw-pro
         url:
           type: string
           example: https://cloudfront.net/productid/downloadid.mp4
@@ -603,7 +585,6 @@ components:
       required:
         - filename
         - productType
-        - fileFormat
         - downloadFormat
         - key
       properties:
@@ -619,18 +600,10 @@ components:
           type: string
           description: Product type
           example: countdown
-        fileFormat:
-          type: string
-          description: Physical file format
-          example: mp4
         downloadFormat:
           type: string
           description: Friendly format representing quality, file type, or both
           example: photoshop-hd
-        resolution:
-          type: string
-          description: Friendly name for resolution
-          example: 720p
         key:
           type: string
           example: 123/motion-background/private/6k-pro/
@@ -640,7 +613,6 @@ components:
       required:
         - filename
         - productType
-        - fileFormat
         - downloadFormat
         - key
         - size
@@ -658,18 +630,10 @@ components:
           type: string
           description: Product type
           example: title-overlay
-        fileFormat:
-          type: string
-          description: Physical file format
-          example: png
         downloadFormat:
           type: string
           description: Friendly format representing quality, file type, or both
           example: photoshop-hd
-        resolution:
-          type: string
-          description: Friendly name for resolution
-          example: 4k
         key:
           type: string
           example: 123/motion-background/private/6k-pro/01.mp4
