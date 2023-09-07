@@ -312,14 +312,18 @@ components:
             type: string
           example: ["1080p-pro", "720p"]
         frame_rate:
-          type: number
-          format: float
-          description: Frame rate if product is a video
-          example: 23.98
+          type: array
+          description: List of frame rates in the product
+          item:
+            type: number
+            format: float
+          example: [24, 23.98]
         audio:
-          type: string
-          description: Audio type of product
-          example: "spoken-word"
+          type: array
+          description: List of audio types in the product
+          item:
+            type: string
+          example: ["spoken-word", "music-only"]
         file_format:
           type: array
           description: List of file formats across all downloads in product
@@ -384,14 +388,18 @@ components:
             type: string
           example: ["1080p-pro", "720p"]
         frame_rate:
-          type: number
-          format: float
-          description: Frame rate if product is a video
-          example: 23.98
+          type: array
+          description: List of frame rates in the product
+          item:
+            type: number
+            format: float
+          example: [24, 23.98]
         audio:
-          type: string
-          description: Audio type of product
-          example: "spoken-word"
+          type: array
+          description: List of audio types in the product
+          item:
+            type: string
+          example: ["spoken-word", "music-only"]
         file_format:
           type: array
           description: List of file formats across all downloads in product
@@ -543,14 +551,18 @@ components:
             type: string
           example: ["1080p-pro", "720p"]
         frameRate:
-          type: number
-          format: float
-          description: Frame rate if product is a video
-          example: 23.98
+          type: array
+          description: List of frame rates in the product
+          item:
+            type: number
+            format: float
+          example: [24, 23.98]
         audio:
-          type: string
-          description: Audio type if product has audio
-          example: music-only
+          type: array
+          description: List of audio types in the product
+          item:
+            type: string
+          example: ["spoken-word", "music-only"]
         fileFormat:
           type: array
           description: List of file formats across all downloads in product
