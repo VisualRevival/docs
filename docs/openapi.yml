@@ -248,13 +248,12 @@ components:
           items:
             type: string
           example: ["1080p-pro", "720p"]
-        frame_rate:
+        framerate:
           type: array
           description: List of frame rates across all products in bundle
           items:
-            type: number
-            format: float
-          example: [24, 23.98]
+            type: string
+          example: ["24", "23_98"]
         audio:
           type: array
           description: List of audio types across all products in bundle
@@ -319,13 +318,12 @@ components:
           items:
             type: string
           example: ["1080p-pro", "720p"]
-        frame_rate:
+        framerate:
           type: array
           description: List of frame rates in the product
           items:
-            type: number
-            format: float
-          example: [24, 23.98]
+            type: string
+          example: ["24", "23_98"]
         audio:
           type: array
           description: List of audio types in the product
@@ -404,13 +402,12 @@ components:
           items:
             type: string
           example: ["1080p-pro", "720p"]
-        frame_rate:
+        framerate:
           type: array
           description: List of frame rates in the product
           items:
-            type: number
-            format: float
-          example: [24, 23.98]
+            type: string
+          example: ["24", "23_98"]
         audio:
           type: array
           description: List of audio types in the product
@@ -490,9 +487,8 @@ components:
           type: array
           description: List of frame rates across all products in bundle
           items:
-            type: number
-            format: float
-          example: [24, 23.98]
+            type: string
+          example: ["24", "23_98"]
         audio:
           type: array
           description: List of audio types across all products in bundle
@@ -579,9 +575,8 @@ components:
           type: array
           description: List of frame rates in the product
           items:
-            type: number
-            format: float
-          example: [24, 23.98]
+            type: string
+          example: ["24", "23_98"]
         audio:
           type: array
           description: List of audio types in the product
