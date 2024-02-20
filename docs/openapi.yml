@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: "3.1.0"
 info:
   title: Visual Revival API
   description: Visual Revival API Documention for AWS and Wordpress
@@ -272,7 +272,7 @@ components:
           type: string
           description: Played when user hovers over thumbnail
           example: https://cloudfront.net/bundleId/preview_hover.mp4
-        product_media:
+        product_gallery:
           type: array
           description: List of product media for the product
           items:
@@ -345,7 +345,7 @@ components:
           type: string
           description: Played when user hovers over thumbnail
           example: https://cloudfront.net/bundleId/preview_hover.mp4
-        product_media:
+        product_gallery:
           type: array
           description: List of product media for the product
           items:
@@ -365,7 +365,7 @@ components:
         - product_type
         - thumbnail
         - downloads
-        - product_media
+        - product_gallery
       properties:
         bundle_id:
           type: integer
@@ -433,7 +433,7 @@ components:
           type: string
           description: Played when user hovers over thumbnail
           example: https://cloudfront.net/bundleId/preview_hover.mp4
-        product_media:
+        product_gallery:
           type: array
           description: List of product media for the product
           items:
@@ -503,7 +503,7 @@ components:
           type: string
           description: S3 Key of the uploaded hover preview image for the bundle. This is used in thumbnail listings. Only required when creating a bundle.
           example: 123/public/preview_hover.jpg
-        productMedia:
+        productGallery:
           type: array
           description: List of product media for the product
           items:
@@ -594,7 +594,7 @@ components:
           type: string
           description: S3 Key of the uploaded hover preview image for the product. This is used in thumbnail listings. Only required when creating a product.
           example: 123/motion-background/public/01_preview_hover.jpg
-        productMedia:
+        productGallery:
           type: array
           description: List of product media for the product
           items:
