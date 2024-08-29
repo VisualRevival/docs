@@ -209,6 +209,13 @@ components:
             $ref: "#/components/schemas/CreateProduct"
       description: Product object to be created
       required: true
+    CreateEmptyProduct:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateEmptyProduct"
+      description: Product object to be created
+      required: true
   schemas:
     BundleResponse:
       type: object
@@ -886,12 +893,17 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/NewDownload"
-    CreateEmptyProductRequest:
+    CreateEmptyProduct:
       type: object
       required:
         - name
         - title
       properties:
+        bundle_id:
+          type: integer
+          format: int64
+          example: 1
+          description: Parent bundle ID for product
         name:
           type: string
           example: Prism Glow 01
