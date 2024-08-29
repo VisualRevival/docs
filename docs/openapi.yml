@@ -19,7 +19,7 @@ tags:
       Schema for JSON file sent from Pack Processor to AWS for standalone product
       <SchemaDefinition schemaRef="#/components/schemas/PackProcessorProduct" />
 paths:
-  /bundle:
+  /bundle/{bundleId}:
     get:
       tags:
         - Wordpress
@@ -35,14 +35,13 @@ paths:
                 $ref: "#/components/schemas/BundleResponse"
         "404":
           description: Bundle not found
+  /bundle:
     put:
       tags:
         - Wordpress
       summary: Update bundle media
       description: Update an existing bundle's media assets
       operationId: updateBundleMedia
-      requestBody:
-        $ref: "#/components/requestBodies/UpdateBundle"
       responses:
         "204":
           description: Bundle updated
@@ -162,6 +161,23 @@ paths:
     servers:
       - url: https://obev9z9046.execute-api.us-west-2.amazonaws.com
         description: AWS dev stage
+      - url: https://visualrevival.wordpress.com/api/v1
+        description: Wordpress dev stage
+    get:
+      tags:
+        - Wordpress
+      summary: Get product
+      description: Get existing Product
+      operationId: getProduct
+      responses:
+        "200":
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Bundle not found
     delete:
       tags:
         - AWS
