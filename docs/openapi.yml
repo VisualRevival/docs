@@ -255,6 +255,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Product"
+        downloads:
+          type: array
+          items:
+            $ref: "#/components/schemas/Download"
     CreateProductResponse:
       type: object
       required:
