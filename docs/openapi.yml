@@ -919,11 +919,6 @@ components:
         - name
         - title
       properties:
-        bundle_id:
-          type: integer
-          format: int64
-          example: 1
-          description: Parent bundle ID for product
         name:
           type: string
           example: Prism Glow 01
